@@ -1,16 +1,11 @@
- # Exjobb – Embracer (metadata/arkiv)
+# Exjobb Embracer
 
-## Syfte
-Proof of Concept för tillförlitlig metadata: insamling, normalisering och AI-stödd berikning.
+Proof-of-concept för att strukturera och kvalitetssäkra metadata om spel, personer och företag i Embracers arkiv.
 
 ## Struktur
-- docs/ – anteckningar, mallar, beslut
-- data/raw/ – **IGNORERAS** (ingen rådata i Git)
-- data/samples/ – små CSV-exempel (ok)
-- logs/ – DQ-loggar, risker/beslut
-- queries/ – SQL/skript
-
-## Policy
-- Lägg aldrig känslig data i Git.
-- Endast små samples i `data/samples/`.
-
+- `data/` – rådata
+- `data_model/` – CSV-specifikationer
+- `datasets/sample/` – testdataset
+- `validators/` – valideringsskript
+- `reports/` – genererade rapporter
+- `docs/` – dokumentation
