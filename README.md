@@ -1,4 +1,4 @@
- # Exjobb – Worko (metadata/arkiv)
+ # Exjobb – Embracer (metadata/arkiv)
 
 ## Syfte
 Proof of Concept för tillförlitlig metadata: insamling, normalisering och AI-stödd berikning.
