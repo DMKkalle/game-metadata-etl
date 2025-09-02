@@ -1,0 +1,27 @@
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.code-workspace
+
+# Data (lägg aldrig rådata i Git)
+data/raw/
+data/external/
+secrets/
+*.zip
+*.7z
+*.tar
+*.tar.gz
+
+# Python/Node/Java
+__pycache__/
+*.pyc
+.venv/
+env/
+node_modules/
+target/
+out/
+
+# Jupyter
+.ipynb_checkpoints/
