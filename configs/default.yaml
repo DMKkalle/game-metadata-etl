@@ -1,0 +1,222 @@
+# =========================
+# Default pipeline-config
+# =========================
+# Idén: Allt i data/raw/ körs automatiskt. Vi normaliserar plattform (utan
+# att binda till land/region), samlar "evidence" (broadcast/land/språk/SKU),
+# väger ihop dem och infererar region/country om evidensen räcker. Annars
+# flaggar vi raden som "needs_manual". Inga hårdkodade sanningar.
+
+input:
+  dir: data/raw
+  pattern: "**/*.csv"            # Kör ALLA CSV (även i undermappar)
+  encoding: auto                 # Testa utf-8, latin1, utf-16 i kod
+  csv_sep: auto                  # Testa ',', ';', '\t'
+  columns:                       # Vad pipeline letar efter i filen
+    object_id_field: "object_number"
+    title_field: "title"
+    platform_field: "object_name"
+    platform_type_field: "object_name.type"
+    category_field: "object_category"
+    broadcast_field: "broadcast_standard"
+    language_field: "title.language"
+    place_field: "place_of_publication"
+    serial_fields:                # Om vi lägger till senare (SKU/seriekod)
+      - "serial"
+      - "sku"
+      - "product_code"
+
+outputs:
+  dir: data/outputs
+  files:
+    works: "works.csv"
+    releases: "releases.csv"
+    items_to_releases: "items_to_releases.csv"
+    review_queue: "review_queue.csv"
+    provenance: "provenance.json"
+  overwrite: true
+
+# -------------------------
+# Plattform-normalisering
+# -------------------------
+# OBS: Detta bestämmer ENDAST "platform_norm" (SNES/SFC/etc). Det binder
+# INTE till region/land. Vi kan ha SFC i JP/HK/TW/KR om evidensen säger så.
+platform_normalization:
+  case_insensitive: true
+  explode_on_delimiters: [";", "|"]    # "SFC;Game Boy" → två plattformar
+  synonyms:
+    SNES:
+      - "Nintendo Super Nintendo Entertainment System"
+      - "Super Nintendo"
+      - "Super NES"
+      - "SNES"
+      - "SNS"                          # förekommer i vissa koder
+    SFC:
+      - "Nintendo Super Famicom"
+      - "Super Famicom"
+      - "SFC"
+      - "SHVC"                         # förekommer i vissa koder
+    # Lägg till fler vid behov (NES/Famicom, Mega Drive/Genesis etc.)
+  fallback_from_filename:              # I nödfall, ledtråd från filnamn
+    SNES: "(?i)\\b(snes|super.*nintendo)\\b"
+    SFC:  "(?i)\\b(sfc|famicom)\\b"
+
+# -------------------------
+# Evidens-baserad inferens
+# -------------------------
+# Vi samlar signaler, multiplicerar/adderar vikter och beslutar region_group
+# (PAL / NTSC-U/C / NTSC-J / etc) och ev. country. Inget är hårdkodat.
+region_inference:
+  method: "weighted_evidence"
+
+  # 1) Broadcast-standard → region_group-evidens
+  broadcast_weights:
+    PAL:
+      region_group: "PAL"
+      weight: 0.70
+    NTSC:
+      region_group: "NTSC-U/C"         # generell NTSC (US/CA) om ej NTSC-J
+      weight: 0.70
+    NTSC-J:
+      region_group: "NTSC-J"
+      weight: 0.70
+
+  # 2) Plats → stark evidens för land + region_group
+  place_map:
+    # key kan vara på flera språk; lägg till efter behov
+    "Japan":        { country: "JP", region_group: "NTSC-J", weight: 0.90 }
+    "日本":          { country: "JP", region_group: "NTSC-J", weight: 0.90 }
+    "Hong Kong":    { country: "HK", region_group: "NTSC-J", weight: 0.90 }
+    "Taiwan":       { country: "TW", region_group: "NTSC-J", weight: 0.90 }
+    "Korea":        { country: "KR", region_group: "NTSC-J", weight: 0.90 }
+    "United States":{ country: "US", region_group: "NTSC-U/C", weight: 0.90 }
+    "USA":          { country: "US", region_group: "NTSC-U/C", weight: 0.90 }
+    "Canada":       { country: "CA", region_group: "NTSC-U/C", weight: 0.90 }
+    "United Kingdom": { country: "GB", region_group: "PAL", weight: 0.90 }
+    "Germany":      { country: "DE", region_group: "PAL", weight: 0.90 }
+    "France":       { country: "FR", region_group: "PAL", weight: 0.90 }
+    "Spain":        { country: "ES", region_group: "PAL", weight: 0.90 }
+    "Italy":        { country: "IT", region_group: "PAL", weight: 0.90 }
+    "Scandinavia":  { country: "SCN", region_group: "PAL", weight: 0.60 }  # semi-landkod
+
+  # 3) Språk → svagare evidens (kan vara innehåll/titel, inte alltid box)
+  language_hints:
+    "ja":       { region_group: "NTSC-J", weight: 0.40 }
+    "zh-Hant":  { country: "TW", region_group: "NTSC-J", weight: 0.40 }
+    "zh-HK":    { country: "HK", region_group: "NTSC-J", weight: 0.40 }
+    "en-US":    { country: "US", region_group: "NTSC-U/C", weight: 0.30 }
+    "en-GB":    { country: "GB", region_group: "PAL", weight: 0.30 }
+    "de":       { country: "DE", region_group: "PAL", weight: 0.30 }
+    "fr":       { country: "FR", region_group: "PAL", weight: 0.30 }
+    "es":       { country: "ES", region_group: "PAL", weight: 0.30 }
+    "it":       { country: "IT", region_group: "PAL", weight: 0.30 }
+
+  # 4) Serienummer/SKU → stark evidens (regex). Dessa är KONFIG och kan
+  # ändras/utökas – inget är hårdkodat i koden.
+  serial_patterns:
+    - pattern: "^SHVC[- ]?[A-Z0-9]+"
+      infer: { region_group: "NTSC-J", country: "JP" }
+      weight: 0.95
+    - pattern: "^SNS[- ]?[A-Z0-9]+[- ]?USA$"
+      infer: { region_group: "NTSC-U/C", country: "US" }
+      weight: 0.95
+    - pattern: "^SNSP[- ]?[A-Z0-9]+[- ]?EUR$"
+      infer: { region_group: "PAL", country: "EU" }   # EU “superland”
+      weight: 0.95
+    - pattern: "[- ](NOE|UKV|FRA|ESP|ITA|HOL|SCN)$"
+      infer_from_suffix: true                         # suffix anger landkod
+      weight: 0.95
+    - pattern: "[- ]JPN$"
+      infer: { region_group: "NTSC-J", country: "JP" }
+      weight: 0.95
+
+  # Vikt-summering & trösklar: vi summerar vikter per kandidat och väljer
+  # högst poäng. Om maxpoängen är under tröskeln → "needs_manual".
+  thresholds:
+    region_group_min: 0.70
+    country_min: 0.70
+
+  tie_breaking:
+    order: ["serial_patterns", "place_map", "broadcast_weights", "language_hints"]
+    # Om lika poäng: välj enligt ordningen ovan (serienummer väger tyngst).
+
+  unknown_labels:
+    region_group: "unknown"
+    country: "unknown"
+    status_if_unknown: "needs_manual"
+
+# -------------------------
+# ID-generering
+# -------------------------
+id_generation:
+  slug:
+    lowercase: true
+    replace:
+      "&": "and"
+    remove_regex: "[^a-z0-9]+"
+    trim_hyphens: true
+  work_id: "{slug(title)}_{platform_norm}"
+  release_id: "{work_id}_{region_group}_{country}"   # country kan vara EU/SCN/etc.
+
+# -------------------------
+# Enrichment (API-källor)
+# -------------------------
+# Dessa körs EFTER länkning till release_id, för att fylla djupinfo + provenance.
+enrichment:
+  enabled: true
+  consensus:
+    method: "weighted_majority"
+    accept_threshold: 0.60
+  sources:
+    igdb:
+      enabled: true
+      weight: 0.30
+      client_id_env: "IGDB_CLIENT_ID"
+      client_secret_env: "IGDB_CLIENT_SECRET"
+      rate_limit_per_min: 4
+    mobygames:
+      enabled: true
+      weight: 0.45
+      api_key_env: "MOBYGAMES_API_KEY"
+      rate_limit_per_min: 10
+    wikidata:
+      enabled: true
+      weight: 0.20
+      rate_limit_per_min: 30
+  fields:
+    work_level:      # sånt som brukar vara gemensamt
+      - developers
+      - composers
+      - genres
+      - series
+      - external_ids_work
+    release_level:   # sånt som kan skilja per release
+      - publishers
+      - release_date
+      - languages
+      - serial_sku
+      - upc_ean
+      - cover_url
+      - external_ids_release
+  provenance:
+    write: true
+    path: "data/outputs/provenance.json"
+
+# -------------------------
+# Process-beteende
+# -------------------------
+processing:
+  logging_level: "INFO"
+  keep_unknown_rows: true                 # behåll rader även om region ej kan bestämmas
+  write_review_queue: true                # skriv osäkra fall till review_queue.csv
+  explode_delimiters:
+    title: [";"]
+    platform: [";"]
+    language: [";"]
+  validators:
+    require_unique_ids: true              # kontrollera unika work/release-id:n
+    require_object_id: true
+  reproducibility:
+    write_run_manifest: true
+    run_manifest_path: "data/outputs/run_manifest.json"
+  security:
+    redact_api_keys_in_logs: true
