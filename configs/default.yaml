@@ -59,6 +59,8 @@ platform_normalization:
   fallback_from_filename:              # I nödfall, ledtråd från filnamn
     SNES: "(?i)\\b(snes|super.*nintendo)\\b"
     SFC:  "(?i)\\b(sfc|famicom)\\b"
+  external_map: "configs/platform_map.yaml"  # se separat fil
+  
 
 # -------------------------
 # Evidens-baserad inferens
@@ -163,6 +165,7 @@ id_generation:
 # Dessa körs EFTER länkning till release_id, för att fylla djupinfo + provenance.
 enrichment:
   enabled: true
+  weights_file: "configs/source_weights.yaml"
   consensus:
     method: "weighted_majority"
     accept_threshold: 0.60

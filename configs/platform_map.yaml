@@ -1,3 +1,90 @@
-Nintendo Super Famicom: SFC
-Nintendo Super Nintendo Entertainment System: SNES
-# "Super Famicom" → SFC; "Super Nintendo" → SNES
+# Plattformskarta – normaliserar råa strängar till kanoniska koder.
+# Viktigt: detta säger bara VILKEN plattform (SNES/SFC/…),
+# inte VILKET LAND/REGION. Region infereras separat via evidens (broadcast, plats, språk, SKU).
+#
+# Prioritetsordning i normalisering:
+# 1) exact_map  2) alias_map  3) regex_map  4) fallback_from_filename (i default.yaml)
+
+exact_map:
+  "Nintendo Super Famicom": SFC
+  "Super Famicom": SFC
+  "SFC": SFC
+  "Nintendo Super Nintendo Entertainment System": SNES
+  "Super Nintendo": SNES
+  "Super NES": SNES
+  "SNES": SNES
+  "Nintendo Entertainment System": NES
+  "NES": NES
+  "Nintendo Family Computer": FAMICOM
+  "Famicom": FAMICOM
+  "Nintendo Game Boy": GB
+  "Game Boy": GB
+  "Neo Geo": NEO-AES         # om rådata inte skiljer AES/MVS – justera vid behov
+  "Neo Geo AES": NEO-AES
+  "Neo Geo MVS": NEO-MVS
+  "Sega Mega Drive": MD
+  "Sega Genesis": GEN
+  "Nintendo 64": N64
+  "Sony PlayStation": PS
+
+alias_map:
+  SNES:
+    - "Nintendo Super NES"
+    - "SNS"          # syns ibland i koder
+  SFC:
+    - "SHVC"         # prefix i serienummer (japanska utgåvor)
+  GB:
+    - "GameBoy"
+    - "GB"
+  NEO-AES:
+    - "SNK Neo Geo AES"
+    - "Neo-Geo AES"
+  NEO-MVS:
+    - "SNK MVS"
+    - "Neo-Geo MVS"
+
+regex_map:
+  - pattern: "(?i)^snes(\\b|[^a-z])|super\\s*nintendo"
+    code: SNES
+  - pattern: "(?i)^sfc(\\b|[^a-z])|super\\s*famicom|\\bshvc\\b"
+    code: SFC
+  - pattern: "(?i)famicom|family\\s*computer"
+    code: FAMICOM
+  - pattern: "(?i)nes(\\b|[^a-z])|nintendo\\s*entertainment\\s*system"
+    code: NES
+  - pattern: "(?i)game\\s*boy|\\bgb\\b"
+    code: GB
+  - pattern: "(?i)neo\\s*geo\\s*mvs"
+    code: NEO-MVS
+  - pattern: "(?i)neo\\s*geo(\\s*aes)?"
+    code: NEO-AES
+  - pattern: "(?i)mega\\s*drive"
+    code: MD
+  - pattern: "(?i)genesis"
+    code: GEN
+  - pattern: "(?i)^n64|nintendo\\s*64"
+    code: N64
+
+# (Valfritt) familjer – hjälper om du vill slå ihop varianter i rapporter.
+families:
+  SNES: SNES
+  SFC: SNES
+  NES: NES
+  FAMICOM: NES
+  MD: MD/GEN
+  GEN: MD/GEN
+  NEO-AES: NEO
+  NEO-MVS: NEO
+  GB: GB
+  N64: N64
+
+# (Valfritt) media – normalisera object_name.type om du vill.
+media_map:
+  Cartridge: cartridge
+  Kassett: cartridge
+  Diskette: disk
+  "Floppy Disk": disk
+  "CD-ROM": optical
+  CD: optical
+  LaserDisc: optical
+  HuCard: hucard

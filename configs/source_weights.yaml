@@ -1,1 +1,153 @@
-#
+# ================================
+# Source Weights & Consensus Rules
+# ================================
+# Syfte: Styr hur vi väger ihop data från flera källor (IGDB, MobyGames, Wikidata, m.fl.)
+# till ett slutligt värde per fält (t.ex. composer, publisher, release_date).
+# Allt här är konfig – inga hårdkodade sanningar i koden.
+
+version: 1
+
+# ----------------
+# Käll-specifik vikt
+# ----------------
+# base_weight = grundförtroende för källan (0–1).
+# fields = vilka fält vi låter källan “tala om”.
+# allow_on_platforms = (valfritt) begränsa källan till vissa plattformar.
+sources:
+  mobygames:
+    base_weight: 0.45
+    fields:
+      - developers
+      - publishers
+      - composers
+      - release_date
+      - alt_titles
+      - languages
+      - serial_sku
+      - cover_url
+      - external_ids_release
+  igdb:
+    base_weight: 0.30
+    fields:
+      - developers
+      - publishers
+      - release_date
+      - alt_titles
+      - cover_url
+      - genres
+      - external_ids_work
+  wikidata:
+    base_weight: 0.20
+    fields:
+      - developers
+      - publishers
+      - composers
+      - release_date
+      - external_ids_work
+      - external_ids_release
+  thegamesdb:
+    base_weight: 0.05
+    fields:
+      - alt_titles
+      - cover_url
+      - external_ids_work
+  pcgamingwiki:
+    base_weight: 0.05
+    allow_on_platforms: [PC, DOS, WINDOWS, MAC, LINUX]
+    fields:
+      - release_date
+      - languages
+      - external_ids_work
+
+# ----------------
+# Matchningsbonusar/-avdrag per källa
+# ----------------
+# Dynamiska justeringar beroende på hur väl en träff stämmer.
+# (Dessa läggs ovanpå base_weight när vi räknar “rösten” för ett fält.)
+adjustments:
+  # Gäller alla källor om inte överskrivet
+  global:
+    bonuses:
+      exact_title_platform_match: 0.10   # exakt titel + plattform
+      cross_source_agreement: 0.05       # annan källa säger samma värde
+    penalties:
+      low_title_similarity:
+        threshold: 0.85                  # t.ex. token_set_ratio < 0.85
+        delta: -0.10
+      platform_mismatch: -0.20           # källans plattform ≠ vår norm
+  # (Valfritt) källa-specifika overrides
+  per_source:
+    mobygames:
+      bonuses:
+        serial_present_match: 0.10       # SKU/seriekod stämmer
+    igdb:
+      penalties:
+        missing_platform_id: -0.05
+    wikidata:
+      bonuses:
+        has_qid_linked_ids: 0.05         # QID kopplad till andra ID:n
+
+# ----------------
+# Konsensus per fält
+# ----------------
+# accept_threshold = min. vägd andel (0–1) för att “låsa” ett värde.
+# quorum_min_sources = min. antal källor som bör “delta” i beslutet.
+# priority_order = om lika vikt, vilken källa vinner som tie-breaker.
+consensus:
+  method: weighted_majority   # andra varianter kan vara "max_confidence"
+  default:
+    accept_threshold: 0.60
+    quorum_min_sources: 2
+    priority_order: [mobygames, wikidata, igdb, thegamesdb, pcgamingwiki]
+  per_field:
+    release_date:
+      accept_threshold: 0.70
+      quorum_min_sources: 2
+    serial_sku:
+      accept_threshold: 0.80
+      quorum_min_sources: 1   # ofta 1 källa räcker om serienummer är robust
+    composers:
+      accept_threshold: 0.60
+      quorum_min_sources: 2
+    languages:
+      accept_threshold: 0.60
+      quorum_min_sources: 2
+
+# ----------------
+# Normalisering per fält (innan jämförelse)
+# ----------------
+# Hjälper källor att “menas” samma sak.
+normalization:
+  release_date:
+    prefer_precision: day      # day > month > year
+    resolve_year_only_to: "YYYY"  # behåll årtal om dag saknas
+  languages:
+    to_iso639: true
+    sort_and_dedup: true
+  names:
+    trim_punctuation: true
+    ignore_case: true
+  alt_titles:
+    split_on: [";", "|"]
+    trim: true
+    dedup: true
+
+# ----------------
+# Konflikthantering (efter röstning)
+# ----------------
+conflicts:
+  tie_breaking:
+    prefer_priority_order: true       # använd consensus.priority_order
+    prefer_value_seen_in_more_sources: true
+    prefer_more_precise_dates: true   # YYYY-MM-DD vinner över YYYY
+  if_below_threshold:
+    action: "defer"                   # sätt fältet som “unknown” och skicka till review
+    review_reason: "low_consensus"
+
+# ----------------
+# Output & provenance
+# ----------------
+output:
+  write_per_field_confidence: true    # t.ex. confidence_release_date = 0.78
+  write_overall_confidence: true
+  include_source_votes: true          # spara hur varje källa röstade i provenance.json
