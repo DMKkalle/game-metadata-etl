@@ -4,3 +4,6 @@
 __pycache__/
 *.pyc
 .venv/
+.env
+.igdb_token.json
+#data/external/igdb/*.csv kanske inte vill spara alla csv vid aktuell sökning på git sen
