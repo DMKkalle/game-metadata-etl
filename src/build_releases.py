@@ -121,7 +121,7 @@ def _lower(x):
     except Exception:
         return ""
 
-# ISO2 (SE, US) och flagg-emojis
+# ISO2 & flagg-emojis
 ISO2_RE = re.compile(r"\b([A-Z]{2})\b")
 FLAG_RE = re.compile(r"[\U0001F1E6-\U0001F1FF]{2}")
 
@@ -133,11 +133,9 @@ def _flag_to_iso2(flag: str) -> str | None:
 
 def split_multi(val: str | None):
     s = _to_str(val).replace("|", ";").replace(",", ";")
-    parts = [p.strip() for p in s.split(";") if p.strip()]
-    return parts
+    return [p.strip() for p in s.split(";") if p.strip()]
 
 def guess_countries(place: str | None, broadcast: str | None = "", title: str | None = "") -> list[str]:
-    # Coerce till str
     place_s = _to_str(place)
     bcast_s = _to_str(broadcast)
     title_s = _to_str(title)
@@ -210,7 +208,7 @@ def guess_languages(lang_field: str | None, title: str | None = "", place: str |
 
     return sorted(langs)
 
-# --- Edition-id från (title, platform, region) --------------------------------
+# --- ID-hjälpare --------------------------------------------------------------
 
 def edition_key(title: str, platform: str, region: str) -> str:
     return f"{title.strip()}|{platform.strip()}|{region.strip()}"
@@ -218,6 +216,13 @@ def edition_key(title: str, platform: str, region: str) -> str:
 def edition_id_from_key(key: str) -> str:
     h = hashlib.sha1(key.encode("utf-8")).hexdigest()[:10].upper()
     return f"ED-{h}"
+
+def release_key(edition_id: str, country: str, language: str, date: str) -> str:
+    return f"{edition_id}|{country}|{language}|{date}"
+
+def release_id_from_key(key: str) -> str:
+    h = hashlib.sha1(key.encode("utf-8")).hexdigest()[:10].upper()
+    return f"RL-{h}"
 
 # --- Huvud --------------------------------------------------------------------
 
@@ -255,9 +260,8 @@ def main():
         is_bundle = any(x in cat for x in ["bundle", "compilation", "collection"]) \
                     or "bundle" in ttype or "bundle" in ontype
 
-        # Titel-lista
+        # Titlar att emittera
         if is_bundle:
-            # alt_titles = ingående spel (bevara ordningen)
             alt = [t for t in _to_str(r.get("alt_titles")).split("|") if t.strip()]
             titles_to_emit = alt if alt else [_to_str(r.get("title_primary"))]
         else:
@@ -275,7 +279,7 @@ def main():
             r.get("place_of_publication")
         )
 
-        # --- objects_expanded: parent-rad (alltid med)
+        # --- objects_expanded: parent alltid med ---
         expanded_rows.append({
             "object_id": parent_obj,
             "parent_object": "",
@@ -286,13 +290,13 @@ def main():
             "is_virtual_child": False,
         })
 
-        # --- Emission per titel
+        # --- Emission per titel ---
         if is_bundle:
-            # skapa stabila child-ids parent#1, #2, ...
+            # Skapa stabila child-ids parent#1, #2, ...
             for idx, t in enumerate(titles_to_emit, start=1):
                 child_id = f"{parent_obj}#{idx}"
 
-                # virtuellt barn-objekt
+                # Virtuellt barn-objekt
                 expanded_rows.append({
                     "object_id": child_id,
                     "parent_object": parent_obj,
@@ -303,12 +307,11 @@ def main():
                     "is_virtual_child": True,
                 })
 
-                # edition/release/mapping för barnet
                 ed_key = edition_key(t, platform, region)
-                ed_id = edition_id_from_key(ed_key)
+                ed_id  = edition_id_from_key(ed_key)
 
                 items_rows.append({
-                    "object_number": child_id,  # mappa BARNET till editionen
+                    "object_number": child_id,  # mappa barnet till editionen
                     "edition_id": ed_id
                 })
 
@@ -318,16 +321,16 @@ def main():
                             "edition_id": ed_id,
                             "title_primary": t,
                             "platform": platform,
-                            "country": c,       # ISO-liknande kod, EU/UNK tillåtet
-                            "language": l,      # ISO-liknande kod, xx = okänt
-                            "release_date": "", # (fyll på om ni har datum)
-                            "source_object": child_id,  # barn-objektet är källan för denna release
+                            "country": c,
+                            "language": l,
+                            "release_date": "",
+                            "source_object": child_id,
                         })
         else:
-            # icke-bundle → mappa originalobjektet som vanligt
+            # Icke-bundle → mappa originalobjektet som vanligt
             t = titles_to_emit[0]
             ed_key = edition_key(t, platform, region)
-            ed_id = edition_id_from_key(ed_key)
+            ed_id  = edition_id_from_key(ed_key)
 
             items_rows.append({
                 "object_number": parent_obj,
@@ -346,39 +349,70 @@ def main():
                         "source_object": parent_obj,
                     })
 
-    # --- Skriv ut CSV:er ---
-    releases = pd.DataFrame(releases_rows).drop_duplicates().sort_values(
-        ["title_primary", "platform", "country", "language"]
-    )
-    releases.to_csv(OUT_DIR / "releases.csv", index=False, encoding="utf-8")
+    # --- Normalisera releases till unik nivå + separata källor -----------------
+    releases_raw = pd.DataFrame(releases_rows)
 
+    if releases_raw.empty:
+        print("❌ Inga releases genererades.")
+        return
+
+    keycols = ["edition_id", "country", "language", "release_date"]
+    releases_raw["release_key"] = releases_raw.apply(
+        lambda r: release_key(r["edition_id"], r["country"], r["language"], r["release_date"]),
+        axis=1
+    )
+    releases_raw["release_id"] = releases_raw["release_key"].apply(release_id_from_key)
+
+    # release_sources: en rad per (release_id, source_object)
+    release_sources = (
+        releases_raw.loc[:, ["release_id", "source_object"]]
+        .drop_duplicates()
+        .sort_values(["release_id", "source_object"])
+    )
+
+    # releases (unika): droppa dubbletter på nyckeln, ta representativ titel/plattform
+    releases = (
+        releases_raw
+        .sort_values(["edition_id", "title_primary", "platform"])  # determinism
+        .drop_duplicates(subset=["release_key"])
+        .loc[:, ["release_id", "edition_id", "title_primary", "platform", "country", "language", "release_date"]]
+        .sort_values(["title_primary", "platform", "country", "language"])
+    )
+
+    # --- Skriv ut releases & release_sources ----------------------------------
+    releases.to_csv(OUT_DIR / "releases.csv", index=False, encoding="utf-8")
+    release_sources.to_csv(OUT_DIR / "release_sources.csv", index=False, encoding="utf-8")
+
+    # --- items_to_editions -----------------------------------------------------
     items_to_editions = pd.DataFrame(items_rows).drop_duplicates()
     items_to_editions.to_csv(OUT_DIR / "items_to_editions.csv", index=False, encoding="utf-8")
 
+    # --- objects_expanded ------------------------------------------------------
     objects_expanded = pd.DataFrame(expanded_rows).drop_duplicates()
     objects_expanded.to_csv(OUT_DIR / "objects_expanded.csv", index=False, encoding="utf-8")
 
-    # editions (unika) från releases (säkrast när bundles ger nya titlar)
+    # --- editions: EN rad per edition_id --------------------------------------
     editions = (
         releases.loc[:, ["edition_id", "title_primary", "platform"]]
-                .drop_duplicates()
-                .merge(
-                    # hämta region från närmaste match i games
-                    games.loc[:, ["region", "platform_norm", "title_primary"]]
-                         .rename(columns={"platform_norm": "platform"}),
-                    how="left",
-                    on=["title_primary", "platform"]
-                )
-                .fillna({"region": ""})
-                .loc[:, ["edition_id", "title_primary", "platform", "region"]]
-                .drop_duplicates()
-                .sort_values(["title_primary", "platform", "region"])
+                .drop_duplicates(subset=["edition_id"])
+                .sort_values(["title_primary", "platform"])
     )
+
+    # region-map (deterministiskt från games)
+    region_map = (
+        games.assign(_edkey = games.apply(lambda r: edition_key(r.get("title_primary",""), r.get("platform_norm",""), r.get("region","")), axis=1))
+             .assign(_edid  = lambda df: df["_edkey"].apply(edition_id_from_key))
+             .loc[:, ["_edid", "region"]]
+             .drop_duplicates(subset=["_edid"])
+             .rename(columns={"_edid":"edition_id"})
+    )
+    editions = editions.merge(region_map, on="edition_id", how="left").fillna({"region": ""})
     editions.to_csv(OUT_DIR / "editions.csv", index=False, encoding="utf-8")
 
-    # --- Snabb summering ---
-    print(f"✅ releases.csv: {len(releases)} rader")
-    print(f"✅ editions.csv: {len(editions)} editioner")
+    # --- Snabb summering -------------------------------------------------------
+    print(f"✅ releases.csv: {len(releases)} rader (unika)")
+    print(f"✅ release_sources.csv: {len(release_sources)} kopplingar release↔source_object")
+    print(f"✅ editions.csv: {len(editions)} editioner (unika)")
     print(f"✅ items_to_editions.csv: {len(items_to_editions)} kopplingar")
     print(f"✅ objects_expanded.csv: {len(objects_expanded)} objekt (inkl. virtuella barn)")
 
@@ -387,13 +421,12 @@ def main():
 
     print("\nReleases per country (top 15):")
     print(rel_by_country.to_string())
-
     print("\nReleases per language (top 15):")
     print(rel_by_lang.to_string())
 
-    # Liten bundle-rapport: vilka föräldrar har barn?
+    # Liten bundle-rapport
     child_counts = (
-        objects_expanded[objects_expanded["is_virtual_child"]]
+        objects_expanded[objects_expanded["is_virtual_child"] == True]
         .groupby("parent_object")["object_id"]
         .count()
         .sort_values(ascending=False)

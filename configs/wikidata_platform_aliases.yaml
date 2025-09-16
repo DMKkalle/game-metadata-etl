@@ -1,0 +1,54 @@
+# Mappa din platform_norm -> Wikidata-plattformsnamn som syns i P400 (labels)
+SNES:
+  - "Super Nintendo Entertainment System"
+  - "Super NES"
+  - "SNES"
+SFC:
+  - "Super Famicom"
+  - "Super Nintendo Entertainment System"
+  - "SFC"
+MD:
+  - "Sega Mega Drive"
+GEN:
+  - "Sega Genesis"
+NES:
+  - Nintendo Entertainment System
+FAMICOM:
+  - Family Computer
+GB:
+  - Game Boy
+GBC:
+  - Game Boy Color
+GBA:
+  - Game Boy Advance
+N64:
+  - Nintendo 64
+GG:
+  - Game Gear
+SAT:
+  - Sega Saturn
+DC:
+  - Dreamcast
+PS:
+  - PlayStation
+PS2:
+  - PlayStation 2
+PS3:
+  - PlayStation 3
+PS4:
+  - PlayStation 4
+PS5:
+  - PlayStation 5
+X360:
+  - Xbox 360
+XONE:
+  - Xbox One
+XSERIES:
+  - Xbox Series X/S
+AMIGA:
+  - Amiga
+C64:
+  - Commodore 64
+PC:
+  - Microsoft Windows
+  - Windows
