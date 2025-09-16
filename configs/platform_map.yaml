@@ -6,6 +6,8 @@
 # 1) exact_map  2) alias_map  3) regex_map  4) fallback_from_filename (i default.yaml)
 
 exact_map:
+  
+  # --- Nintendo ---
   "Nintendo Super Famicom": SFC
   "Super Famicom": SFC
   "SFC": SFC
@@ -19,29 +21,307 @@ exact_map:
   "Famicom": FAMICOM
   "Nintendo Game Boy": GB
   "Game Boy": GB
-  "Neo Geo": NEO-AES         # om rådata inte skiljer AES/MVS – justera vid behov
-  "Neo Geo AES": NEO-AES
-  "Neo Geo MVS": NEO-MVS
+  "Nintendo Switch": NSW
+  "Nintendo Wii U": WIIU
+  "Nintendo Wii": WII
+  "Nintendo GameCube": NGC
+  "Nintendo 3DS": 3DS
+  "Nintendo DS": NDS
+  "Game Boy Advance": GBA
+  "Game Boy Color": GBC
+  "Virtual Boy": VB
+  "Nintendo 64": N64
+
+  # --- Sega ---
+  "Sega Master System": SMS
+  "Sega Mark III": SMS
   "Sega Mega Drive": MD
   "Sega Genesis": GEN
-  "Nintendo 64": N64
+  "Sega 32X": 32X
+  "Sega/Mega CD": SCD
+  "Sega CD": SCD
+  "Mega CD": SCD
+  "Sega Saturn": SAT
+  "Sega Dreamcast": DC
+  "Sega Game Gear": GG
+  "Sega SG-1000": SG1K
+  "Sega SC-3000": SG1K
+
+  # --- Sony ---
+  "Sony PlayStation 5": PS5
+  "Sony PlayStation 4": PS4
+  "Sony PlayStation 3": PS3
+  "Sony PlayStation 2": PS2
   "Sony PlayStation": PS
+  "PS one": PS
+  "PlayStation Portable": PSP
+  "PlayStation Vita": PSV
+
+  # --- Microsoft ---
+  "Xbox Series X|S": XSX
+  "Xbox One": XONE
+  "Microsoft Xbox 360": X360
+  "Microsoft Xbox": XBOX
+
+  # --- NEC / Hudson ---
+  "NEC PC Engine": PCE
+  "NEC TurboGrafx-16": PCE
+  "NEC PC Engine CD-ROM² System": PCE-CD
+  "NEC PC Engine Super CD-ROM²": PCE-CD
+  "NEC TurboDuo": PCE-CD
+  "TurboGrafx-16 CD": PCE-CD
+
+  # --- Commodore ---
+  "Commodore 64": C64
+  "Commodore Amiga": AMIGA
+  "Commodore Amiga 500": AMIGA
+  "Commodore Amiga 600": AMIGA
+  "Commodore Amiga 1200": AMIGA
+  "Amiga CD32": ACD32
+
+  # --- Atari ---
+  "Atari 2600": A2600
+  "Atari VCS": A2600
+  "Atari 5200": A5200
+  "Atari 7800": A7800
+  "Atari Lynx": LYNX
+  "Atari Jaguar": JAG
+  "Atari Jaguar CD": JAGCD
+  "Atari ST": AST
+  "Atari 8-bit": A8
+
+  # --- SNK ---
+  "Neo Geo AES": NEO-AES
+  "Neo Geo MVS": NEO-MVS
+  "Neo Geo CD": NGCD
+  "Neo Geo": NEO-AES
+  "Neo Geo Pocket": NGP
+  "Neo Geo Pocket Color": NGPC
+
+  # --- Bandai ---
+  "WonderSwan": WS
+  "WonderSwan Color": WSC
+
+  # --- Sinclair / Amstrad / MSX / m.fl. ---
+  "Sinclair ZX Spectrum": ZX
+  "Amstrad CPC": CPC
+  "MSX": MSX
+  "MSX2": MSX2
+  "MSX2+": MSX2+
+
+  # --- NEC PC-98 / PC-88 / japanska datorer ---
+  "NEC PC-9801": PC98
+  "NEC PC-8801": PC88
+  "Sharp X68000": X68K
+  "Fujitsu FM Towns": FMT
+
+  # --- Apple / PC ---
+  "Apple II": A2
+  "Apple IIGS": A2GS
+  "Apple Macintosh": MAC
+  "PC (MS-DOS)": DOS
+  "PC (Windows)": WIN
+
+  # --- 3DO / CD-i / Vectrex / Intv / Coleco / Odyssey ---
+  "Panasonic 3DO": 3DO
+  "Philips CD-i": CDI
+  "Vectrex": VEC
+  "Mattel Intellivision": INTV
+  "ColecoVision": COLECO
+  "Magnavox Odyssey²": ODY2
+
 
 alias_map:
   SNES:
     - "Nintendo Super NES"
-    - "SNS"          # syns ibland i koder
+    - "Super Nintendo Entertainment System"
+    - "SNS"
   SFC:
-    - "SHVC"         # prefix i serienummer (japanska utgåvor)
+    - "Super Famicom"
+    - "Nintendo Super Famicom"
+    - "SHVC"
+  NES:
+    - "Nintendo Entertainment System"
+  FAMICOM:
+    - "Family Computer"
+    - "Nintendo Family Computer"
   GB:
     - "GameBoy"
     - "GB"
+  GBC:
+    - "GameBoy Color"
+  GBA:
+    - "GBA"
+  NDS:
+    - "DS"
+  3DS:
+    - "3DS"
+  NGC:
+    - "GameCube"
+    - "Nintendo Game Cube"
+  WIIU:
+    - "Wii U"
+  WII:
+    - "Wii"
+  NSW:
+    - "Switch"
+    - "Nintendo Switch"
+
+  MD:
+    - "Mega Drive"
+  GEN:
+    - "Genesis"
+  SMS:
+    - "Master System"
+    - "Mark III"
+  SCD:
+    - "Sega CD"
+    - "Mega CD"
+    - "Mega-CD"
+    - "Sega/Mega CD"
+  32X:
+    - "Mega Drive 32X"
+    - "Genesis 32X"
+  SAT:
+    - "Saturn"
+  DC:
+    - "Dreamcast"
+  GG:
+    - "Game Gear"
+  SG1K:
+    - "SG-1000"
+    - "SC-3000"
+
+  PS5:
+    - "PlayStation 5"
+    - "PS5"
+  PS4:
+    - "PlayStation 4"
+    - "PS4"
+  PS3:
+    - "PlayStation 3"
+    - "PS3"
+  PS2:
+    - "PlayStation 2"
+    - "PS2"
+  PS:
+    - "PlayStation"
+    - "PS1"
+    - "PSX"
+    - "PS one"
+  PSP:
+    - "PSP"
+  PSV:
+    - "PS Vita"
+    - "PlayStation Vita"
+
+  XSX:
+    - "Xbox Series X"
+    - "Xbox Series S"
+    - "Xbox Series"
+  XONE:
+    - "Xbox One"
+  X360:
+    - "Xbox 360"
+    - "X360"
+  XBOX:
+    - "Xbox"
+
+  PCE:
+    - "PC Engine"
+    - "TurboGrafx-16"
+    - "Turbo Grafx"
+    - "TG-16"
+  PCE-CD:
+    - "PC Engine CD-ROM²"
+    - "Super CD-ROM²"
+    - "TurboGrafx-16 CD"
+    - "Turbo Duo"
+
+  AMIGA:
+    - "Commodore Amiga 500"
+    - "Amiga 500"
+    - "Amiga 600"
+    - "Amiga 1200"
+    - "Amiga"
+  ACD32:
+    - "Amiga CD32"
+
+  C64:
+    - "C64"
+
+  A2600:
+    - "Atari VCS"
+  LYNX:
+    - "Lynx"
+  JAG:
+    - "Jaguar"
+  JAGCD:
+    - "Jaguar CD"
+
   NEO-AES:
-    - "SNK Neo Geo AES"
     - "Neo-Geo AES"
+    - "SNK Neo Geo AES"
   NEO-MVS:
-    - "SNK MVS"
     - "Neo-Geo MVS"
+    - "SNK MVS"
+  NGCD:
+    - "Neo-Geo CD"
+  NGP:
+    - "Neo Geo Pocket"
+  NGPC:
+    - "Neo Geo Pocket Color"
+
+  ZX:
+    - "ZX Spectrum"
+    - "Spectrum"
+  CPC:
+    - "Amstrad CPC"
+
+  MSX:
+    - "MSX1"
+  MSX2:
+    - "MSX 2"
+  MSX2+:
+    - "MSX 2+"
+
+  PC98:
+    - "PC-98"
+  PC88:
+    - "PC-8801"
+
+  X68K:
+    - "X68000"
+  FMT:
+    - "FM Towns"
+
+  MAC:
+    - "Mac"
+    - "Macintosh"
+    - "Mac OS"
+    - "Mac OS X"
+
+  DOS:
+    - "MS-DOS"
+    - "IBM PC"
+  WIN:
+    - "Windows"
+    - "Microsoft Windows"
+    - "Steam"
+    - "GOG"
+
+  3DO:
+    - "3DO Interactive Multiplayer"
+  CDI:
+    - "CD-i"
+  INTV:
+    - "Intellivision"
+  COLECO:
+    - "Coleco Vision"
+  ODY2:
+    - "Odyssey2"
+    - "Odyssey²"
+
 
 regex_map:
   - pattern: "(?i)^snes(\\b|[^a-z])|super\\s*nintendo"
@@ -64,6 +344,132 @@ regex_map:
     code: GEN
   - pattern: "(?i)^n64|nintendo\\s*64"
     code: N64
+  - pattern: "(?i)sega\\s*saturn"
+    code: SAT
+  - pattern: "(?i)dreamcast"
+    code: DC
+  - pattern: "(?i)game\\s*gear"
+    code: GG
+  - pattern: "(?i)master\\s*system|mark\\s*iii"
+    code: SMS
+  - pattern: "(?i)(mega\\s*drive(?!\\s*32))"
+    code: MD
+  - pattern: "(?i)genesis(?!\\s*32)"
+    code: GEN
+  - pattern: "(?i)32x"
+    code: 32X
+  - pattern: "(?i)(sega\\s*cd|mega[-\\s]*cd|mega-cd|sega/mega\\s*cd)"
+    code: SCD
+
+  - pattern: "(?i)playstation\\s*5|\\bps5\\b"
+    code: PS5
+  - pattern: "(?i)playstation\\s*4|\\bps4\\b"
+    code: PS4
+  - pattern: "(?i)playstation\\s*3|\\bps3\\b"
+    code: PS3
+  - pattern: "(?i)playstation\\s*2|\\bps2\\b"
+    code: PS2
+  - pattern: "(?i)playstation(?!\\s*[2345])|\\bpsx\\b|ps\\s*one"
+    code: PS
+  - pattern: "(?i)playstation\\s*portable|\\bpsp\\b"
+    code: PSP
+  - pattern: "(?i)ps\\s*vita|playstation\\s*vita|\\bpsv\\b"
+    code: PSV
+
+  - pattern: "(?i)xbox\\s*series|series\\s*(x|s)"
+    code: XSX
+  - pattern: "(?i)xbox\\s*one"
+    code: XONE
+  - pattern: "(?i)xbox\\s*360|\\bx360\\b"
+    code: X360
+  - pattern: "(?i)\\bxbox\\b"
+    code: XBOX
+
+  - pattern: "(?i)pc\\s*engine\\s*(super\\s*)?cd[-\\s]*rom"
+    code: PCE-CD
+  - pattern: "(?i)pc\\s*engine|turbo\\s*grafx|turbografx|tg-?16"
+    code: PCE
+
+  - pattern: "(?i)amiga\\s*cd32"
+    code: ACD32
+  - pattern: "(?i)amiga(\\s*\\d{3,4})?"
+    code: AMIGA
+  - pattern: "(?i)commodore\\s*64|\\bc64\\b"
+    code: C64
+
+  - pattern: "(?i)atari\\s*2600|\\bvcs\\b"
+    code: A2600
+  - pattern: "(?i)atari\\s*5200"
+    code: A5200
+  - pattern: "(?i)atari\\s*7800"
+    code: A7800
+  - pattern: "(?i)atari\\s*lynx|\\blynx\\b"
+    code: LYNX
+  - pattern: "(?i)atari\\s*jaguar\\s*cd"
+    code: JAGCD
+  - pattern: "(?i)atari\\s*jaguar"
+    code: JAG
+  - pattern: "(?i)atari\\s*st"
+    code: AST
+
+  - pattern: "(?i)neo\\s*geo\\s*mvs"
+    code: NEO-MVS
+  - pattern: "(?i)neo\\s*geo\\s*aes"
+    code: NEO-AES
+  - pattern: "(?i)neo\\s*geo\\s*cd"
+    code: NGCD
+  - pattern: "(?i)neo\\s*geo(?!\\s*(cd|pocket))"
+    code: NEO-AES
+  - pattern: "(?i)neo\\s*geo\\s*pocket\\s*color"
+    code: NGPC
+  - pattern: "(?i)neo\\s*geo\\s*pocket"
+    code: NGP
+
+  - pattern: "(?i)zx\\s*spectrum|\\bspectrum\\b"
+    code: ZX
+  - pattern: "(?i)amstrad\\s*cpc"
+    code: CPC
+  - pattern: "(?i)msx\\s*2\\+"
+    code: MSX2+
+  - pattern: "(?i)msx\\s*2"
+    code: MSX2
+  - pattern: "(?i)\\bmsx\\b"
+    code: MSX
+
+  - pattern: "(?i)pc-?98"
+    code: PC98
+  - pattern: "(?i)pc[-\\s]*8801|pc-?88"
+    code: PC88
+  - pattern: "(?i)x68000"
+    code: X68K
+  - pattern: "(?i)fm\\s*towns"
+    code: FMT
+
+  - pattern: "(?i)apple\\s*iigs"
+    code: A2GS
+  - pattern: "(?i)apple\\s*ii(?!gs)"
+    code: A2
+  - pattern: "(?i)mac\\b|mac\\s*os(\\s*x)?|macintosh"
+    code: MAC
+
+  - pattern: "(?i)ms-?dos|\\bibm\\s*pc\\b|\\bdos\\b"
+    code: DOS
+  - pattern: "(?i)windows|microsoft\\s*windows|\\bsteam\\b|\\bgog\\b"
+    code: WIN
+
+  - pattern: "(?i)3do"
+    code: 3DO
+  - pattern: "(?i)cd-?i|cd\\s*i"
+    code: CDI
+  - pattern: "(?i)vectrex"
+    code: VEC
+  - pattern: "(?i)intellivision"
+    code: INTV
+  - pattern: "(?i)coleco\\s*vision|colecovision"
+    code: COLECO
+  - pattern: "(?i)odyssey(2|²)"
+    code: ODY2
+
 
 # (Valfritt) familjer – hjälper om du vill slå ihop varianter i rapporter.
 families:
@@ -77,6 +483,28 @@ families:
   NEO-MVS: NEO
   GB: GB
   N64: N64
+  PS: PS
+  PS2: PS
+  PS3: PS
+  PS4: PS
+  PS5: PS
+  XBOX: XBOX
+  X360: XBOX
+  XONE: XBOX
+  XSX: XBOX
+  MD: MD/GEN
+  GEN: MD/GEN
+  SNES: SNES
+  SFC: SNES
+  NES: NES
+  FAMICOM: NES
+  AMIGA: AMIGA
+  ACD32: AMIGA
+  PCE: PCE
+  PCE-CD: PCE
+  NEO-AES: NEO
+  NEO-MVS: NEO
+  NGCD: NEO
 
 # (Valfritt) media – normalisera object_name.type om du vill.
 media_map:

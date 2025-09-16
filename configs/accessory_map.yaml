@@ -1,0 +1,47 @@
+# accessory_map.yaml
+# Normaliserar tillbehör och extra material
+
+exact_map:
+  "Manual": manual
+  "Game Manual": manual
+  "Instruction Booklet": manual
+  "Map": map
+  "Poster": poster
+  "Flyer": flyer
+  "Vinyl": soundtrack
+  "Soundtrack": soundtrack
+  "Music CD": soundtrack
+  "OST": soundtrack
+  "Strategy Guide": guide
+  "Artbook": artbook
+  "Sticker": sticker
+  "Trading Card": card
+  "Figurine": figure
+  "Merchandise": merch
+
+regex_map:
+  - pattern: "(?i)manual|instruction|booklet"
+    code: manual
+  - pattern: "(?i)vinyl|ost|soundtrack|music"
+    code: soundtrack
+  - pattern: "(?i)map"
+    code: map
+  - pattern: "(?i)poster|flyer"
+    code: poster
+  - pattern: "(?i)guide|strategy"
+    code: guide
+  - pattern: "(?i)art.?book"
+    code: artbook
+  - pattern: "(?i)sticker"
+    code: sticker
+  - pattern: "(?i)card"
+    code: card
+  - pattern: "(?i)figure|figurine"
+    code: figure
+  - pattern: "(?i)merch|goodies"
+    code: merch
+  - pattern: "(?i)\\bcd\\b|\\baudio\\b|\\bmusic\\b"
+    code: soundtrack
+  - pattern: "(?i)shipping\\s*box|carton|outer\\s*box|case|display\\s*box"
+    code: packaging
+

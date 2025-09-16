@@ -1,9 +1,11 @@
 """
 normalize_one.py — Steg 2: Normalisera EN rå-CSV (förhandsvisning)
+
 Syfte:
 - Läsa första CSV i data/raw/
 - Normalisera plattform -> 'platform_norm' (SNES/SFC/…)
 - Dela titel -> 'title_primary' + 'alt_titles'
+- Klassificera tillbehör -> 'accessory_type' (manual/soundtrack/poster/…)
 - INTE ändra originalet. Skriv bara en debug-fil till data/outputs/_debug_normalized.csv
 
 Körning:
@@ -11,7 +13,8 @@ Körning:
 
 Krav:
 - pandas, pyyaml
-- configs/platform_map.yaml (frivilligt, men rekommenderas)
+- configs/platform_map.yaml        (valfritt men rekommenderas)
+- configs/accessory_map.yaml       (valfritt men rekommenderas)
 """
 
 from pathlib import Path
@@ -19,12 +22,14 @@ import re
 import pandas as pd
 import yaml
 
+# --- Paths --------------------------------------------------------------------
 RAW_DIR = Path("data/raw")
 OUT_DIR = Path("data/outputs")
 PLATFORM_MAP_PATH = Path("configs/platform_map.yaml")
+ACCESSORY_MAP_PATH = Path("configs/accessory_map.yaml")
 
-# --- Hjälpare: robust CSV-läsning (samma som i peek_raw) ---------------------
-def read_csv_auto(p: Path, encodings=("utf-8","latin1","utf-16"), seps=(",", ";", "\t")):
+# --- Hjälpare: robust CSV-läsning --------------------------------------------
+def read_csv_auto(p: Path, encodings=("utf-8", "latin1", "utf-16"), seps=(",", ";", "\t")):
     """
     Testa flera encodings och separatorer tills något funkar.
     Om allt landar i 1 kolumn (troligen fel sep) -> prova nästa.
@@ -97,7 +102,54 @@ def canon_platform(raw_value: str, pmap: dict) -> str | None:
 
     return None  # okänd plattform
 
-def split_on_many(val: str | None, delimiters=(";","|")) -> list[str]:
+# --- Accessory-normalisering --------------------------------------------------
+def load_accessory_map():
+    """
+    Ladda configs/accessory_map.yaml om den finns.
+    Struktur förväntas:
+      exact_map: { "Manual": "manual", "Vinyl": "soundtrack", ... }
+      regex_map: [ {pattern: "...", code: "manual"}, ... ]
+    """
+    if ACCESSORY_MAP_PATH.exists():
+        with open(ACCESSORY_MAP_PATH, "r", encoding="utf-8") as f:
+            data = yaml.safe_load(f) or {}
+        # fallback if keys missing
+        data.setdefault("exact_map", {})
+        data.setdefault("regex_map", [])
+        return data
+    return {"exact_map": {}, "regex_map": []}
+
+def canon_accessory(row: pd.Series, amap: dict) -> str | None:
+    """
+    Försök klassificera raden som 'accessory' baserat på fält som brukar bära typ:
+    - object_name.type, object_category, title.type, eller title
+    Returnerar t.ex. 'manual', 'soundtrack', 'poster'... eller None.
+    """
+    candidates = []
+    for key in ("object_name.type", "object_category", "title.type", "title"):
+        if key in row and pd.notna(row[key]) and str(row[key]).strip():
+            candidates.append(str(row[key]))
+    if not candidates:
+        return None
+
+    text = " | ".join(candidates)
+
+    # exact (fall-insensitive via lower-jämförelse)
+    exact = (amap.get("exact_map") or {})
+    lower_text = text.lower()
+    for raw, code in exact.items():
+        if raw and str(raw).lower() in lower_text:
+            return code
+
+    # regex
+    for spec in (amap.get("regex_map") or []):
+        if re.search(spec.get("pattern", ""), text, flags=re.IGNORECASE):
+            return spec.get("code")
+
+    return None
+
+# --- Stränghjälpare -----------------------------------------------------------
+def split_on_many(val: str | None, delimiters=(";", "|")) -> list[str]:
     """Dela sträng på flera delimiters och trimma whitespace."""
     if val is None:
         return []
@@ -122,62 +174,121 @@ def split_title(title: str | None) -> tuple[str, str]:
 
 # --- Huvudflöde ---------------------------------------------------------------
 def main():
-    # 1) Välj EN CSV i data/raw (vi kör långsamt och kontrollerat).
     csvs = sorted(RAW_DIR.rglob("*.csv"))
     if not csvs:
-        print("❌ Hittade inga CSV i data/raw/. Lägg dit en fil och kör igen.")
+        print("❌ Hittade inga CSV i data/raw/. Lägg dit filer och kör igen.")
         return
-    path = csvs[0]
-    print(f"[NORMALIZE] Läser: {path}")
 
-    # 2) Läs in robust
-    df, used_enc, used_sep = read_csv_auto(path)
-    print(f"- Upptäckt encoding: {used_enc} | separator: {repr(used_sep)}")
-    print(f"- Form (före): {df.shape[0]} rader × {df.shape[1]} kolumner")
-
-    # 3) Ladda plattformskartan (konfigstyrd)
     pmap = load_platform_map()
+    amap = load_accessory_map()
 
-    # 4) Gör nya kolumner: platform_norm, title_primary, alt_titles
-    platform_col = "object_name"              # från din fil
-    title_col = "title"                       # från din fil
+    summary_rows = []
+    debug_dir = OUT_DIR / "debug"
+    debug_dir.mkdir(parents=True, exist_ok=True)
 
-    # Flagga om cellen verkar innehålla flera plattformar (vi exploderar INTE än)
-    df["platform_raw_first"] = df[platform_col].apply(
-        lambda v: (split_on_many(v, delimiters=(";", "|")) or [None])[0]
-    )
-    df["platform_norm"] = df["platform_raw_first"].apply(lambda v: canon_platform(v, pmap))
+    for path in csvs:
+        print(f"[NORMALIZE] Läser: {path}")
+        df, used_enc, used_sep = read_csv_auto(path)
+        print(f"- Upptäckt encoding: {used_enc} | separator: {repr(used_sep)}")
+        print(f"- Form (före): {df.shape[0]} rader × {df.shape[1]} kolumner")
 
-    df[["title_primary", "alt_titles"]] = df.apply(
-        lambda r: pd.Series(split_title(r.get(title_col))), axis=1
-    )
+        platform_col = "object_name"
+        title_col = "title"
 
-    # 5) Snabb sammanfattning för ögat
-    total = len(df)
-    known = df["platform_norm"].notna().sum()
-    unknown = total - known
-    print(f"- platform_norm satt på {known}/{total} rader ({known/total:.1%})")
-    if unknown:
-        print(f"  ⚠️ Okänd plattform på {unknown} rader (kan bero på ovanliga strängar).")
+        # platform + title
+        df["platform_raw_first"] = df[platform_col].apply(
+            lambda v: (split_on_many(v, delimiters=(";", "|")) or [None])[0]
+        )
+        df["platform_norm"] = df["platform_raw_first"].apply(lambda v: canon_platform(v, pmap))
+        df[["title_primary", "alt_titles"]] = df.apply(
+            lambda r: pd.Series(split_title(r.get(title_col))), axis=1
+        )
 
-    print("\n--- Exempel (5 rader) ---")
-    with pd.option_context("display.max_colwidth", 120, "display.width", 200):
-        print(df[["object_number","platform_raw_first","platform_norm","title_primary","alt_titles"]].head(5).to_string(index=False))
+        # accessories
+        df["accessory_type"] = df.apply(lambda r: canon_accessory(r, amap), axis=1)
+        mask_acc = df["accessory_type"].notna()
+        df.loc[mask_acc, "platform_norm"] = df.loc[mask_acc, "platform_norm"].where(df["platform_norm"].notna(), None)
 
-    # 6) Skriv en liten debug-fil så vi kan öppna i Excel/VSCode och kika
+        # --- metrics per fil ---
+        rows = len(df)
+        acc = int(df["accessory_type"].notna().sum())
+        games = rows - acc
+        unknown_games = int(((df["platform_norm"].isna()) & df["accessory_type"].isna()).sum())
+        known_games = games - unknown_games
+        map_rate = 0.0 if games == 0 else round(100 * known_games / games, 1)
+
+        # accessory breakdown (compact)
+        acc_breakdown = "; ".join([f"{k}:{v}" for k, v in df["accessory_type"].value_counts().to_dict().items()])
+
+        summary_rows.append({
+            "file": path.name,
+            "rows": rows,
+            "games(non-accessory)": games,
+            "accessories": acc,
+            "unknown_platforms(games)": unknown_games,
+            "platform_map_rate_%(games)": map_rate,
+            "encoding": used_enc,
+            "sep": used_sep,
+            "accessories_breakdown": acc_breakdown,
+        })
+
+        # --- UNKNOWN check ---
+        unknown = df[(df["platform_norm"].isna()) & (df["accessory_type"].isna())]
+        if not unknown.empty:
+            print(f"⚠️ UNKNOWN i {path.name}: {len(unknown)} rader")
+            with pd.option_context("display.max_colwidth", 80):
+                print(unknown[["object_number", "platform_raw_first", "title"]].head(10).to_string(index=False))
+        else:
+            print("✅ Inga UNKNOWN i denna fil.")
+
+            
+        # --- debug per fil ---
+        out_path = debug_dir / f"_debug_normalized_{path.stem}.csv"
+        cols_to_save = [
+            "object_number", "title", "title.type",
+            "object_name", "platform_raw_first", "platform_norm",
+            "object_name.type", "object_category",
+            "broadcast_standard", "title.language", "place_of_publication",
+            "title_primary", "alt_titles", "accessory_type",
+        ]
+        cols_to_save = [c for c in cols_to_save if c in df.columns or c in
+                        ["platform_raw_first","platform_norm","title_primary","alt_titles","accessory_type"]]
+        df[cols_to_save].to_csv(out_path, index=False, encoding="utf-8")
+        print(f"✅ Skrev debug-fil: {out_path}\n")
+
+
+
+    # --- Snygg sammanfattning över alla filer ---
     OUT_DIR.mkdir(parents=True, exist_ok=True)
-    out_path = OUT_DIR / "_debug_normalized.csv"
-    cols_to_save = [
-        "object_number", "title", "title.type",
-        "object_name", "platform_raw_first", "platform_norm",
-        "object_name.type", "object_category",
-        "broadcast_standard", "title.language", "place_of_publication",
-        "title_primary", "alt_titles",
-    ]
-    # Spara bara de kolumner som faktiskt finns
-    cols_to_save = [c for c in cols_to_save if c in df.columns or c in ["platform_raw_first","platform_norm","title_primary","alt_titles"]]
-    df[cols_to_save].to_csv(out_path, index=False, encoding="utf-8")
-    print(f"\n✅ Skrev debug-fil: {out_path}")
+    summary_df = pd.DataFrame(summary_rows)
+
+    # totalrad (viktad map-rate över alla games)
+    total_games = int(summary_df["games(non-accessory)"].sum())
+    total_unknown = int(summary_df["unknown_platforms(games)"].sum())
+    total_map_rate = 0.0 if total_games == 0 else round(100 * (total_games - total_unknown) / total_games, 1)
+
+    totals = pd.DataFrame([{
+        "file": "TOTAL",
+        "rows": int(summary_df["rows"].sum()),
+        "games(non-accessory)": total_games,
+        "accessories": int(summary_df["accessories"].sum()),
+        "unknown_platforms(games)": total_unknown,
+        "platform_map_rate_%(games)": total_map_rate,
+        "encoding": "",
+        "sep": "",
+        "accessories_breakdown": "",
+    }])
+
+    out_summary = OUT_DIR / "_normalize_summary.csv"
+    pd.concat([summary_df, totals], ignore_index=True).to_csv(out_summary, index=False, encoding="utf-8")
+
+    print("\n=== NORMALIZE SUMMARY ===")
+    with pd.option_context("display.max_colwidth", 120, "display.width", 160):
+        print(summary_df.to_string(index=False))
+        print("\nTOTALS:")
+        print(totals.to_string(index=False))
+    print(f"\n📄 Sparade sammanfattning: {out_summary}")
+
 
 if __name__ == "__main__":
     main()
