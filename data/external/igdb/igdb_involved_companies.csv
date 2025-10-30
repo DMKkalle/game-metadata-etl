@@ -9,3 +9,691 @@ igdb_id,company_name,developer,publisher,porting,supporting
 270346,iQue,False,True,False,False
 270346,Nintendo,False,True,False,False
 270346,Nintendo R&D2,True,False,False,False
+23597,Macrospace,False,True,False,False
+7704,Enix America Corporation,False,True,False,False
+7704,Quintet,True,False,False,False
+7704,Enix Corporation,False,True,False,False
+5341,Ocean Software,True,True,False,False
+5339,Viacom New Media,False,True,False,False
+5339,Realtime Associates,True,False,False,False
+5339,Ingram Entertainment,False,True,False,False
+46193,Tradewest Inc,False,True,False,False
+46193,D4 Enterprise,False,True,False,False
+46193,Pallas,True,False,False,False
+46193,SNK,False,True,False,False
+46193,K Amusement Leasing,False,True,False,False
+46193,Monolith,False,False,True,False
+38353,Tomy,False,True,False,False
+38353,Genki,True,False,False,False
+11884,Data East,False,True,False,False
+11884,Data East,True,False,False,False
+11884,Kuusoukagaku,True,False,False,False
+42349,Magical Company,True,True,False,False
+42568,PF Magic,True,False,False,False
+42568,Accolade,False,True,False,False
+42568,Tec Toy,False,True,False,False
+38240,Planning Office Wada,True,True,False,False
+6979,Enix America Corporation,False,True,False,False
+6979,Almanic,True,False,False,False
+6979,Gameplan21,False,True,False,False
+6979,Enix,False,True,False,False
+42301,Pack-In-Video,True,False,False,False
+42301,Artdink,False,True,False,False
+63844,Nippon Telenet,True,True,False,False
+46770,Taito,False,True,False,False
+46770,Teichiku,False,True,False,False
+46770,UPL,True,False,False,False
+38352,Coconuts Japan,False,True,False,False
+38352,C-Lab,True,False,False,False
+49256,Zoo Digital,False,True,False,False
+49256,Metro 3D,False,True,False,False
+49256,Atomic Planet Entertainment,True,False,False,False
+5352,Sega,False,True,False,False
+5352,Sega AM2,True,False,False,False
+5352,Tec Toy,False,True,False,False
+5352,Dempa Shimbunsha,False,False,True,False
+7747,Genki,True,False,False,False
+7747,LOZC G. Amusements,False,True,False,False
+7747,Altron,False,True,False,False
+8448,Eurocom Entertainment Software,False,False,False,True
+8448,Tec Toy,False,True,False,False
+8448,"Creative Capers Entertainment, Inc.",False,False,False,True
+8448,Eurocom Entertainment Software,False,False,True,False
+8448,"Capcom Co., LTD.",False,True,False,False
+8448,Playtronic,False,True,False,False
+8448,Nintendo,False,True,False,False
+8448,Disney Interactive,True,True,False,False
+72032,THQ,False,True,False,False
+72032,Tiertex Design Studios,True,False,False,False
+72032,Disney Interactive,False,True,False,False
+72032,7th Level,True,False,False,False
+42383,Nintendo,True,False,False,False
+42383,Pax Softonica,True,False,False,False
+42383,Dentsu,False,True,False,False
+42383,Mitsui Fudosan,False,True,False,False
+45878,High Voltage Software,False,False,True,False
+45878,Interplay Entertainment,True,True,False,False
+45878,Sega Entertainment,False,True,False,False
+705,EA Canada,True,False,False,False
+705,Extended Play Productions,True,False,False,False
+705,Electronic Arts,False,True,False,False
+705,Gradiente,False,True,False,False
+3285,Bandai,False,True,False,False
+3285,"Natsume Co., Ltd.",True,False,False,False
+42221,Bottom Up,False,True,False,False
+37820,Betop,True,False,False,False
+37820,I'Max,False,True,False,False
+56417,ZOOM,True,True,False,False
+42479,Electronic Arts,False,True,False,False
+42479,Park Place Productions,True,False,False,False
+42479,Tec Toy,False,True,False,False
+560,Rebellion Developments,True,False,False,False
+560,Sega,False,True,False,False
+37854,Tose,True,False,False,False
+37854,Jaleco,False,True,False,False
+71214,Kemco,False,False,True,False
+71214,Vivid Image,True,False,False,False
+71214,Image Works,False,True,False,False
+71214,Elite Systems,False,True,True,False
+71214,Kotobuki Systems,False,True,False,False
+82102,"Atari, Inc.",False,True,False,False
+114033,Human Entertainment,True,True,False,False
+114033,Hyundai,False,True,False,False
+18067,Capcom,True,False,False,False
+18067,Capcom,False,True,False,False
+18067,Capcom,False,False,True,False
+18067,Playtronic,False,True,False,False
+1073,Nintendo,False,True,False,False
+1073,Hyundai,False,True,False,False
+1073,St. GIGA,False,True,False,False
+1073,Nintendo EAD,True,False,False,False
+1073,Playtronic,False,True,False,False
+240915,Banpresto,False,True,False,False
+240915,Winkysoft,True,False,False,False
+42212,Nihon Falcom,False,True,False,False
+42212,Nihon Falcom,True,False,False,False
+42212,Koei,False,True,False,False
+4389,Playtronic,False,True,False,False
+4389,Software Creations,True,False,False,False
+4389,Flying Edge,False,True,False,False
+4389,LJN,False,True,False,False
+46681,"Imagineering, Inc.",True,False,False,False
+46681,Absolute Entertainment,False,True,False,False
+276017,Capcom,True,True,False,False
+276017,Ubisoft Entertainment,False,True,False,False
+42254,Human Entertainment,True,True,False,False
+77378,Nintendo EAD,True,False,False,False
+77378,Nintendo,False,True,False,False
+77378,Playtronic,False,True,False,False
+20134,Tec Toy,False,True,False,False
+97118,Tose,True,False,False,False
+97118,Bandai,False,True,False,False
+32601,Piko Interactive,False,True,False,False
+32601,Norse,True,False,False,False
+249148,Infogrames,False,True,False,False
+249148,Bit Managers,True,False,False,False
+1741,Capcom,True,True,False,False
+1741,Playtronic,False,True,False,False
+1741,Hyundai,False,True,False,False
+1741,Nintendo,False,False,True,False
+1741,Rozner Labs Software Group,False,False,True,False
+1741,Nintendo,False,True,False,False
+1741,Capcom,True,False,False,False
+307353,Laser,True,True,False,False
+38019,Crea-Tech,True,False,False,False
+38019,Axela,False,True,False,False
+4492,Electronic Arts,False,True,False,False
+4492,Foley Hi-Tech Systems,True,False,False,False
+4492,Granite Bay Software,True,False,False,False
+4492,Black Pearl Software,False,True,False,False
+42581,Sony Imagesoft,False,True,False,False
+42581,Ukiyotei,True,False,False,False
+42581,Epic/Sony Records,False,True,False,False
+74032,Digital Illusions CE,True,False,False,False
+74032,21st Century Entertainment,False,True,False,False
+167154,Atari Games,True,False,False,False
+167154,GruntZilla94,False,True,False,False
+213885,Bullfrog Productions,True,False,False,False
+213885,Electronic Arts,False,True,False,False
+135268,Pasta Power,True,True,False,False
+72812,LEVEL-5,True,True,False,False
+287084,Williams Electronics,False,True,False,False
+287084,Digital Eclipse,True,False,False,False
+287084,Midway Home Entertainment,False,True,False,False
+222820,Japan Art Media,True,False,False,False
+222820,Yanoman,False,True,False,False
+136080,Team17,True,True,False,False
+28389,Tradewest Inc,False,True,False,False
+28389,Nintendo of Europe,False,True,False,False
+28389,Software Creations,True,False,False,False
+28389,Activision,False,True,False,False
+1253,Blizzard Entertainment,True,False,False,False
+1253,Interplay Entertainment,False,True,False,False
+5405,EA Canada,True,False,False,False
+5405,EA Sports,False,True,False,False
+5405,High Score Productions,True,False,False,False
+5405,Park Place Productions,True,False,False,False
+6621,Playtronic,False,True,False,False
+6621,Hyundai,False,True,False,False
+6621,Capcom USA,False,True,False,False
+6621,Nintendo,False,True,False,False
+6621,Capcom,True,True,False,False
+242310,"GameTek, Inc.",False,True,False,False
+242310,Digital Illusions,True,False,False,False
+242310,Playtronic,False,True,False,False
+37832,Naxat Soft,True,True,False,False
+198998,Tiger Electronics,True,True,False,False
+198998,Gig,False,True,False,False
+1498,Square,False,True,False,False
+1498,G-Craft,True,False,False,False
+1498,Square Product Development Division 5,True,False,False,False
+42617,Seika Corporation,False,True,False,False
+42617,ZOOM,True,True,False,False
+42617,Kemco,True,True,False,False
+38130,SAS Sakata,True,False,False,False
+38130,Epoch,False,True,False,False
+198669,Tiger Electronics,True,True,False,False
+346267,Psygnosis,False,True,False,False
+346267,Spidersoft,True,False,False,False
+280811,Probe Software,True,False,False,False
+280811,Hudson Soft,False,True,False,False
+284101,Super Game,True,False,False,False
+284101,Realtec,False,True,False,False
+1726,Capcom,True,True,False,False
+1534,Natsume Inc.,False,True,False,False
+1534,"Natsume Co., Ltd.",True,False,False,False
+262153,Bits Studios,True,False,False,False
+262153,Sony Imagesoft,False,True,False,False
+20298,Midway Games,True,True,False,False
+20298,Playtronic,False,True,False,False
+4449,"GameTek, Inc.",False,True,False,False
+4449,Eurocom Entertainment Software,True,False,False,False
+4449,"GameTek, Inc.",True,True,False,False
+47498,Koei,True,True,False,False
+42613,CTA,True,False,False,False
+42613,Ocean,False,True,False,False
+243453,Nintendo,False,True,False,False
+243453,Capcom,True,False,False,False
+243453,Playtronic,False,True,False,False
+204616,Virgin Interactive Entertainment,True,True,False,False
+204616,Gradiente,False,True,False,False
+204616,Playtronic,False,True,False,False
+44437,Sting Entertainment,True,False,False,False
+44437,ASCII Corporation,False,True,False,False
+99509,Data East,True,False,False,False
+99509,G-MODE Corporation,False,True,False,False
+99509,HAMSTER,False,True,True,False
+21023,Rising Star Games,False,True,False,False
+1720,Capcom,True,True,False,False
+5404,Traveller's Tales,True,False,False,False
+5404,Sony Imagesoft,False,True,False,False
+5404,"Creative Capers Entertainment, Inc.",False,False,False,True
+5404,Capcom,False,True,False,False
+5404,Playtronic,False,True,False,False
+8121,Ocean,False,True,False,False
+8121,WJS Design,True,False,False,False
+9151,Nintendo IRD,True,False,False,False
+9151,Nintendo,False,True,False,False
+9151,Playtronic,False,True,False,False
+9151,Locomotive Corporation,True,False,False,False
+9619,Nintendo EAD,True,False,False,False
+9619,Playtronic,False,True,False,False
+9619,Nintendo,True,True,False,False
+44418,C-Lab,True,False,False,False
+44418,Bullet-Proof Software,False,True,False,False
+265033,Titus Software,False,True,False,False
+265033,Titus France,True,False,False,False
+112875,Sony Interactive Entertainment,False,True,False,False
+112875,SIE Santa Monica Studio,True,False,False,False
+112875,Valkyrie Entertainment,False,False,False,True
+112875,Jetpack Interactive,False,False,True,True
+112875,Bluepoint Games,False,False,False,True
+112875,RedHot Software,False,False,False,True
+112875,Original Force,False,False,False,True
+112875,SuperAlloy Interactive,False,False,False,True
+112875,Supergenius Studio,False,False,False,True
+1656,Capcom,True,True,False,False
+1656,Playtronic,False,True,False,False
+6349,Kemco,True,True,False,False
+38389,Daft,True,False,False,False
+38389,Enix,False,True,False,False
+95412,A-Max,True,False,False,False
+95412,Imagineer,False,True,False,False
+4514,SNK,True,False,False,False
+4514,Takara U.S.A.,False,True,False,False
+4514,Takara,False,True,False,False
+4514,K Amusement Leasing,False,True,False,False
+4514,"SNK Home Entertainment, Inc.",False,True,False,False
+4514,SNK of America,False,True,False,False
+4514,SNK Playmore USA,False,True,False,False
+4514,Hudson Soft,False,True,False,False
+4514,"AlfaSystem Co., Ltd.",False,False,True,False
+4514,"D4 Enterprise, Inc",False,True,False,False
+4514,SNK,False,True,False,False
+4514,HAMSTER,False,True,True,False
+4514,Monolith,False,False,True,False
+4514,Sega,False,True,False,False
+38320,Intelligent Systems,True,False,False,False
+38320,Nintendo,False,True,False,False
+243989,DMA Design,True,False,True,False
+243989,Fujitsu,False,True,False,False
+45227,Jackpot,True,False,False,False
+45227,Xing Entertainment,False,True,False,False
+228792,Codemasters,False,True,False,False
+81467,Interplay Productions,True,True,False,False
+242267,Tradewest Inc,False,True,False,False
+242267,Rare,False,True,False,False
+242267,Sony Electronic Publishing Company,False,True,False,False
+242267,Tec Toy,False,True,False,False
+242267,Playtronic,False,True,False,False
+18618,St. GIGA,False,True,False,False
+18618,Hudson Soft,True,True,False,False
+18380,Atreid Concept,True,False,False,False
+18380,Namco,False,True,False,False
+18380,Kalisto Entertainment,True,False,False,False
+202585,Bandai,False,True,False,False
+202585,Tom Create,True,False,False,False
+37944,Advance Communication Company,True,False,False,False
+37944,Tonkin House,False,True,False,False
+5550,Artdink,False,True,False,False
+5550,Riverhillsoft,False,True,False,False
+5550,Atlus,False,True,False,False
+5550,Quest,True,True,False,False
+5550,Square Enix,True,True,False,False
+38185,St. GIGA,False,True,False,False
+38185,Office Koukan,True,False,False,False
+38185,Pack-In-Video,False,True,False,False
+15833,Taito,False,True,False,False
+15833,St. GIGA,False,True,False,False
+15833,Neverland,True,False,False,False
+42623,Interplay Productions,False,True,False,False
+42623,Visual Concepts,True,False,False,False
+42623,Danger Productions,False,False,False,True
+42736,ASCII Corporation,True,True,False,False
+42736,Titus Interactive,False,True,False,False
+42736,Playtronic,False,True,False,False
+18613,Atlus,False,True,False,False
+18613,Denki,True,False,False,False
+324956,Artdink,True,True,False,False
+11313,Square,False,True,False,False
+11313,Square,True,False,False,False
+11313,Square Enix,False,True,False,False
+37982,Access,True,False,False,False
+37982,Imagineer,False,True,False,False
+217684,Tiger Electronics,True,True,False,False
+42348,Electronic Arts Victor,True,True,False,False
+215181,KSS,False,True,False,False
+215181,Natsume Inc.,True,False,False,False
+42342,Tom Create,True,False,False,False
+42342,Bandai,False,True,False,False
+4259,Absolute Entertainment,False,True,False,False
+4259,Instinct Design,True,False,False,False
+4259,Time Warner Interactive,False,True,False,False
+4259,Philips Interactive Media,False,True,False,False
+4259,T&E Soft,False,True,False,False
+4259,Acclaim,False,True,False,False
+4259,Mirage Technologies,True,False,False,False
+42490,Electronic Arts,True,True,False,False
+42490,Ocean,False,True,False,False
+42490,Playtronic,False,True,False,False
+2162,Konami,False,True,False,False
+2162,LucasArts,True,False,False,False
+198801,Tiger Electronics,True,True,False,False
+1124,Konami,True,True,False,False
+84918,Jaleco,False,True,False,False
+84918,St. GIGA,False,True,False,False
+84918,HAMSTER,True,True,False,False
+39039,U.S. Gold,False,True,False,False
+39039,System 3 Software,True,False,False,False
+1178,Natsume Inc.,False,True,False,False
+1178,Neverland,True,False,False,False
+1178,Nintendo,False,True,False,False
+1178,Taito,False,True,False,False
+42662,SETA,False,True,False,False
+42662,Opus,True,False,False,False
+42662,System 3 Software,False,True,False,False
+42612,LucasArts,False,True,False,False
+37791,St. GIGA,False,True,False,False
+37791,Banpresto,False,True,False,False
+38125,Lenar,True,False,False,False
+38125,Bullet-Proof Software,False,True,False,False
+7804,Playtronic,False,True,False,False
+7804,Solid Software,True,False,True,False
+7804,Al Baker & Associates,False,False,True,False
+7804,Accolade,True,True,False,False
+27525,Titus Interactive,True,True,False,False
+27525,Gradiente,False,True,False,False
+27525,Playtronic,False,True,False,False
+231006,Tec Toy,False,True,True,False
+231006,Capcom,True,False,False,False
+218750,Probe Software,True,False,False,False
+218750,Flying Edge,False,True,False,False
+217942,Tiger Electronics,True,True,False,False
+11665,Westwood Studios,True,False,False,False
+9861,Konami Digital Entertainment,True,True,False,False
+9861,Playtronic,False,True,False,False
+4455,U.S. Gold,False,True,False,False
+38161,Banpresto,True,True,False,False
+133313,Nintendo,False,True,False,False
+133313,Intelligent Systems,True,False,False,False
+133313,Playtronic,False,True,False,False
+3656,Nintendo,True,True,False,False
+3656,HAL Laboratory,True,False,False,False
+3656,Nintendo,False,True,False,False
+3656,Playtronic,False,True,False,False
+23091,Electronic Arts,False,True,False,False
+46231,Accolade,False,True,False,False
+46231,Radical Entertainment,True,False,False,False
+38374,ASK,False,True,False,False
+38374,Lenar,True,False,False,False
+9633,Nintendo,False,True,False,False
+9633,Enix Corporation,False,True,False,False
+9633,Quintet,True,False,False,False
+9633,St. GIGA,False,True,False,False
+42423,Game Arts,True,False,False,False
+42423,Enix,False,True,False,False
+174187,Matsushita Electric Industrial,False,True,False,False
+174187,Japan DataWorks,True,False,False,False
+42621,Nintendo,False,True,False,False
+42621,Human Entertainment,True,True,False,False
+42621,St. GIGA,False,True,False,False
+8050,Konami,True,True,False,False
+8050,Hyundai,False,True,False,False
+153771,Blue Byte Software GmbH,True,False,False,False
+153771,Misawa Entertainment,False,True,False,False
+14531,Nintendo,False,True,False,False
+14531,Intelligent Systems,True,False,False,False
+14531,Playtronic,False,True,False,False
+14531,Hyundai,False,True,False,False
+4509,EA Canada,True,False,False,False
+4509,High Score Productions,True,False,False,False
+4509,Electronic Arts,False,True,False,False
+4509,EA Sports,False,True,False,False
+174910,Konami,True,True,False,False
+10162,Acclaim Japan,False,True,False,False
+10162,Tantalus Interactive,True,False,False,False
+10162,Probe Entertainment,True,False,False,False
+10162,Acclaim Entertainment,False,True,False,False
+10162,Playtronic,False,True,False,False
+10162,Tec Toy,False,True,False,False
+4546,Sculptured Software,True,False,False,False
+4546,Midway Manufacturing,False,True,False,False
+4546,Acclaim Japan,False,True,False,False
+4546,Midway,True,False,False,False
+4546,Acclaim Entertainment,False,True,False,False
+1357,Capcom,True,True,False,False
+1357,Tiertex,False,False,True,False
+1357,U.S. Gold,False,True,False,False
+1357,Capcom,True,False,False,False
+76999,Jaleco,False,True,False,False
+76999,Tose,True,False,False,False
+219488,Capcom,True,True,False,False
+74492,Atlus,False,True,False,False
+74492,Team Ladybug,True,False,False,False
+15834,Media Works,False,True,False,False
+15834,Alfa System,True,False,False,False
+19712,High Voltage Software,True,False,False,False
+19712,Atari Corporation,False,True,False,False
+19712,Midway Games,True,True,False,False
+19712,Acclaim Japan,False,True,False,False
+19712,Iguana UK,True,False,False,False
+19712,Acclaim Entertainment,False,True,False,False
+19712,Hyundai,False,True,False,False
+19712,Tec Toy,False,True,False,False
+10843,Factor 5,True,False,False,False
+10843,JVC,False,True,False,False
+10843,LucasArts,True,True,False,False
+10843,Playtronic,False,True,False,False
+1092,Rare,True,False,False,False
+1092,Nintendo,False,True,False,False
+1092,Gradiente,False,True,False,False
+1092,Playtronic,False,True,False,False
+1092,Nintendo,False,False,True,False
+1092,Hyundai,False,True,False,False
+15889,SUNSOFT,True,True,False,False
+15889,St. GIGA,False,True,False,False
+198028,Living Mobile,False,True,False,False
+198028,Hudson Soft,True,True,False,False
+42447,Factor 5,True,False,False,False
+42447,Ocean Software,False,True,False,False
+1103,Nintendo R&D1,True,False,False,False
+1103,Nintendo,False,True,False,False
+1103,Nintendo,True,False,False,False
+1103,Playtronic,False,True,False,False
+1103,Intelligent Systems,False,False,False,True
+1026,St. GIGA,False,True,False,False
+1026,Nintendo EAD,True,False,False,False
+1026,Nintendo,False,True,False,False
+1026,Playtronic,False,True,False,False
+1026,Gradiente,False,True,False,False
+1026,Hyundai,False,True,False,False
+329147,Jennahveer,True,False,False,False
+55092,Q Studios,True,False,False,False
+55092,Square Enix Business Division 8,True,False,False,False
+55092,Square Enix,False,True,False,False
+11616,St. GIGA,False,True,False,False
+11616,Quintet,True,False,False,False
+11616,Enix Corporation,False,True,False,False
+48939,THQ,False,True,False,False
+48939,JVC,False,True,False,False
+48939,Playtronic,False,True,False,False
+48939,Sculptured Software,True,False,False,False
+48939,Realtime Associates,False,False,False,True
+196441,Midway Games,True,False,False,False
+196441,Malibu Games,False,True,False,False
+265060,Infogrames,True,False,False,False
+265060,Nintendo,False,True,False,False
+207235,Teeny Weeny Games,True,False,False,False
+207235,Acclaim Entertainment,False,True,False,False
+207235,Tec Toy,False,True,False,False
+49011,LJN,False,True,False,False
+49011,Beam Software,True,False,False,False
+307394,Garret Hale,True,True,False,False
+7828,Playtronic,False,True,False,False
+7828,Software Creations,True,False,False,False
+7828,Tec Toy,False,True,False,False
+7828,Acclaim Entertainment,False,True,False,False
+7828,LJN,False,True,False,False
+210342,Apple,False,True,False,False
+42637,Psygnosis,False,True,False,False
+42637,Eurocom Entertainment Software,True,False,False,False
+42637,Ignition Entertainment,False,True,True,False
+42637,Pocket Studios,False,False,True,False
+10354,Iron Galaxy Studios,True,False,False,False
+10354,Double Helix Games,True,False,False,False
+10354,Microsoft Studios,False,True,False,False
+190013,Nintendo R&D1,True,False,False,False
+190013,Nintendo,False,True,False,False
+208990,Electronic Arts,True,True,False,False
+208990,TecToy,False,False,True,False
+11603,Namco,True,True,False,False
+353713,Bullfrog Productions,True,False,False,False
+353713,Code To Go,False,False,True,False
+353713,Electronic Arts,False,True,False,False
+353713,Tec Toy,False,True,False,False
+42655,Nintendo,False,True,False,False
+42655,Sculptured Software,True,False,False,False
+42655,Playtronic,False,True,False,False
+81523,Tonkin House,False,True,False,False
+81523,Playtronic,False,True,False,False
+81523,Nintendo,False,True,False,False
+81523,Tose,True,False,False,False
+368893,Probe Entertainment,True,False,False,False
+37251,ADK Corporation,True,True,False,False
+37251,Takara,False,True,False,False
+37251,Saurus,False,True,True,False
+37251,AGENDA,False,False,True,False
+37251,SNK,False,False,False,True
+37251,D4 Enterprise,False,True,True,False
+361131,Nintendo,False,True,False,False
+198933,Tiger Electronics,True,True,False,False
+42636,Nintendo,False,True,False,False
+42636,Unbalance Corporation,False,True,False,False
+42636,St. GIGA,False,True,False,False
+42636,Gradiente,False,True,False,False
+42636,Taito,True,True,False,False
+45708,Anco Software Ltd.,True,False,False,False
+45708,Vic Tokai Europe,False,True,False,False
+45708,Anco Software Ltd.,False,True,False,False
+45566,Playtronic,False,True,False,False
+45566,Tec Toy,False,True,False,False
+81899,Acclaim,False,True,False,False
+81899,Midway,True,False,False,False
+223018,Yoko Soft,True,True,False,False
+28509,Argonaut Software Ltd.,False,False,False,True
+28509,Nintendo EAD Tokyo Software Development Group No.1,True,True,False,False
+28509,Playtronic,False,True,False,False
+19773,Trimark Interactive,False,True,False,False
+19773,Acclaim Entertainment,False,True,False,False
+19773,LJN,False,True,False,False
+19773,Acclaim Japan,False,True,False,False
+19773,Realtime Associates,True,False,False,False
+19773,Playtronic,False,True,False,False
+19773,Tec Toy,False,True,False,False
+198845,Tiger Electronics,True,True,False,False
+42474,TecMagik Entertainment,False,True,False,False
+42474,Manley and Associates Inc,True,False,False,False
+42474,Altron Corporation,False,True,False,False
+7351,BattleCry Studios,False,False,False,True
+7351,Certain Affinity,False,False,False,True
+7351,ZeniMax Germany,False,False,False,True
+7351,MachineGames,False,False,False,True
+7351,id Software,True,False,False,False
+7351,Bethesda Softworks,False,True,False,False
+7351,Tango Gameworks,False,False,False,True
+7351,Escalation Studios,False,False,False,True
+12675,Empire Software,False,True,False,False
+276932,FlashPV,True,True,False,False
+365654,Teeny Weeny Games,True,False,False,False
+365654,Flying Edge,False,True,False,False
+365654,Acclaim,False,True,False,False
+14901,Walking Circles,False,False,True,False
+14901,Grandslam Video Ltd.,False,True,False,False
+14901,Audio Visual Magic,True,False,False,False
+14901,Images Software,True,False,False,False
+15844,Square,False,True,False,False
+15844,Square Enix,False,True,False,False
+15844,Sting,True,False,False,False
+49447,Koei,False,True,False,False
+49447,Ruby Party,True,False,False,False
+45437,Koei,False,True,False,False
+45437,Ruby Party,True,False,False,False
+42455,Nintendo of America,False,True,False,False
+42455,KAZe,True,False,False,False
+42455,Meldac,False,True,False,False
+42455,Playtronic,False,True,False,False
+1709,Nintendo,False,True,False,False
+1709,Game Freak,True,False,False,False
+38210,Tose,True,False,False,False
+38210,Angle,False,True,False,False
+42546,St. GIGA,False,True,False,False
+42546,Hudson Soft,False,True,False,False
+42546,Raizing,True,False,False,False
+36731,Bandai,False,True,False,False
+36731,Tom Create,True,False,False,False
+131387,Bandai,False,True,False,False
+42484,St. GIGA,False,True,False,False
+42484,Enix,False,True,False,False
+42484,Produce!,True,False,False,False
+38184,Tecmo,True,True,False,False
+71128,SNK,True,False,False,False
+71128,D4 Enterprise,False,True,False,False
+71128,Sega,False,True,False,False
+71128,Gaibrain,True,False,False,False
+71128,Tec Toy,False,True,False,False
+71128,SNK,True,True,False,False
+71128,Takara,True,False,False,False
+71128,Magical Company,False,True,False,False
+37811,St. GIGA,False,True,False,False
+37811,Koei,False,True,False,False
+40451,Namco,False,True,False,False
+40451,Arc System Works,True,False,False,False
+36734,Victor Interactive Software,False,True,False,False
+36734,Opera House,True,False,False,False
+37972,Atelier Double,True,False,False,False
+37972,Pony Canyon,False,True,False,False
+38332,Taito,False,True,False,False
+38332,Neverland,True,False,False,False
+42425,Namco,True,True,False,False
+42270,C-Lab,True,False,False,False
+42270,Sammy Studios,False,True,False,False
+122266,Square Enix,False,True,False,False
+63509,St. GIGA,False,True,False,False
+63509,ASCII Corporation,False,True,False,False
+63509,Kuusou Kagaku,True,False,False,False
+46534,Absolute Entertainment,True,True,False,False
+38371,Bullet-Proof Software,True,True,False,False
+42242,Natsume Inc.,True,False,False,False
+42242,Zamuse,False,True,False,False
+37836,Namcot,True,True,False,False
+8564,Data East,True,True,False,False
+8564,Hyundai,False,True,False,False
+58791,Data East,True,True,False,False
+1499,Omiya Soft,True,False,False,False
+1499,Square,False,True,False,False
+1499,Square Enix,False,True,False,False
+1499,Solid,True,False,False,False
+13091,Activision,False,True,False,False
+13091,Dynamix,True,False,False,False
+13091,Cross Media Soft,False,True,False,False
+37843,Data East,True,True,False,False
+78959,"Sega Enterprises, Ltd.",True,True,False,False
+38154,Almanic Corporation,True,False,False,False
+38154,Banpresto,False,True,False,False
+39578,K Amusement Leasing,False,True,False,False
+39578,Wave Corp,True,False,False,False
+39578,Taito,False,True,False,False
+77634,Masaya,True,False,False,False
+77634,"Extreme Co.,Ltd",False,True,False,False
+77634,Hudson Soft,False,True,False,False
+77634,Konami,False,True,False,False
+77634,NCS Corporation,False,True,False,False
+4001,Capcom,False,True,False,False
+4001,Capcom Production Studio 1,True,False,False,False
+38321,Banpresto,True,True,False,False
+306049,Masaya,True,False,False,False
+306049,Shinyuden,False,False,True,False
+306049,Ratalaika Games,True,True,False,False
+5579,SPS,False,True,False,False
+5579,"Sega Enterprises, Ltd.",False,True,False,False
+5579,Hudson Soft,False,True,False,False
+5579,Nintendo,False,True,False,False
+5579,St. GIGA,False,True,False,False
+5579,Nihon Falcom,True,True,False,False
+5579,Epoch,False,True,False,False
+99492,HAMSTER,False,True,False,False
+99492,SNK,True,False,False,False
+129852,NickB,True,True,False,False
+38114,Nintendo,False,True,False,False
+38114,St. GIGA,False,True,False,False
+38114,Culture Brain,True,True,False,False
+38114,Bottom Up,False,True,False,False
+46596,Tecmo,True,True,False,False
+46596,Tec Toy,False,True,False,False
+42406,Compile,True,False,False,False
+42406,Banpresto,False,True,False,False
+42470,St. GIGA,False,True,False,False
+42470,Compile,True,True,False,False
+42555,Max Entertainment,True,False,False,False
+42555,Yanoman,False,True,False,False
+15935,J-Force,True,False,False,False
+15935,Enix,False,True,False,False
+42531,Tose,True,False,False,False
+42531,Bullet-Proof Software,False,True,False,False
+15893,Tecmo,True,True,False,False
+15843,Square,True,True,False,False
+15843,Square Enix,True,True,False,False
+15843,Square Product Development Division 6,True,False,False,False
+42649,Quintet,True,False,False,False
+42649,Enix,False,True,False,False
+42649,Ancient,True,False,False,False
+42462,BEC,True,False,False,False
+42462,Banpresto,False,True,False,False
+4393,Sega,False,True,False,False
+4393,Epoch,False,True,False,False
+4393,Hudson Soft,False,True,False,False
+4393,Nihon Falcom,True,False,False,False
+4393,Nihon Falcom,False,True,False,False
+4450,Activision,True,False,False,False
+4450,Sega of America,False,True,False,False
+4450,Activision,False,True,False,False
