@@ -1,9 +1,36 @@
+# Environment & secrets
+.env
+.env.local
+.igdb_token.json
+
+# Data folders (not committed - too large / contains private archive data)
+data/raw/
+data/outputs/
+data/external/
+data/cache/
+data/processed/
+data/provenance/
+data/staging/
+data/samples/
+
+# Reports (generated files)
 /reports/*
 !/reports/.gitkeep
+
+# Datasets
 /datasets/sample/*.csv
+
+# Python
 __pycache__/
 *.pyc
+*.pyo
 .venv/
-.env
-.igdb_token.json
-#data/external/igdb/*.csv kanske inte vill spara alla csv vid aktuell sökning på git sen
+venv/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.DS_Store
