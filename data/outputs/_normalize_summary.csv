@@ -1,9 +1,0 @@
-file,rows,games(non-accessory),accessories,unknown_platforms(games),platform_map_rate_%(games),encoding,sep,accessories_breakdown
-alltsnesochsfam.csv,2851,2811,40,0,100.0,utf-8,",",soundtrack:28; guide:5; card:4; map:1; packaging:1; manual:1
-Blandad data.csv,17,16,1,0,100.0,utf-8,",",soundtrack:1
-Bundles flera platformar Dålig data.csv,15,14,1,0,100.0,utf-8,",",guide:1
-Bundles flera platformar.csv,6,5,1,0,100.0,utf-8,",",guide:1
-golden.csv,38,32,6,0,100.0,utf-8,",",soundtrack:6
-Neo Geo.csv,11,11,0,0,100.0,utf-8,",",
-SuperNintendo.csv,809,794,15,0,100.0,utf-8,",",soundtrack:10; guide:3; packaging:1; manual:1
-TOTAL,3747,3683,64,0,100.0,,,
